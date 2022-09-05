@@ -1,4 +1,5 @@
 import { newsService } from "../../../service";
+import { parseDate } from "../../../utils/date";
 import { ArticleDto } from "../../dto/article";
 
 export const getHeadlines = async (idCategory: string): Promise<ArticleDto[]> => {
@@ -8,6 +9,6 @@ export const getHeadlines = async (idCategory: string): Promise<ArticleDto[]> =>
         title: article.title,
         description: article.description,
         url: article.url,
-        publishedAt: article.publishedAt
+        publishedAt: parseDate(article.publishedAt),
     }))
 }

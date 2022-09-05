@@ -9,7 +9,10 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 const AppNavigator = () => { 
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Categories" component={Categories} />
+            <Stack.Screen name="Categories" component={Categories} 
+                options={{
+                    title: 'Selecione a categoria'
+                }}/>
             <Stack.Screen name="News" component={News} />
         </Stack.Navigator>
     )

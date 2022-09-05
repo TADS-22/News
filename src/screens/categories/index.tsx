@@ -1,14 +1,25 @@
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useCallback } from "react";
 import { FlatList, ListRenderItemInfo, Text, View } from "react-native";
 import { CategoryDto } from "../../domain/dto/category";
+import { AppNavigationProp } from "../../navigation/interface";
 import CategoryItem from "./components/item";
 import useCategories from "./hook/use-categories";
+
+type CategoryItemInfo = ListRenderItemInfo<CategoryDto>
 
 const Categories = () => {
     const { categories } = useCategories()
 
-    const renderCategory = (item: CategoryDto) =>
-        <CategoryItem item={item} onPress={() => null}/>
+    const navigation = useNavigation<AppNavigationProp>()
+
+    const openNews = useCallback((category: CategoryDto) =>
+        navigation.navigate('News', { category }), [])
+
+    const renderCategory = useCallback(
+        ({ item }: CategoryItemInfo) =>
+            <CategoryItem item={item} onPress={() => openNews(item)} />
+        , [])
 
     const categoryKeyExtractor = (item: CategoryDto) => item.id
 
@@ -16,7 +27,7 @@ const Categories = () => {
         <View>
             <FlatList
                 data={categories}
-                renderItem={({ item }) => renderCategory(item)}
+                renderItem={renderCategory}
                 keyExtractor={categoryKeyExtractor}
             />
         </View>

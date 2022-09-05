@@ -2,7 +2,7 @@ export interface Article {
     title: string,
     description: string,
     url: string,
-    publishedAt: Date
+    publishedAt: string
 }
 
 export interface Headlines { 
