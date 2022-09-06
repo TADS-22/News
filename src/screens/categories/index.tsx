@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { FlatList, ListRenderItemInfo, Text, View } from "react-native";
+import Divider from "../../components/Divider";
 import { CategoryDto } from "../../domain/dto/category";
 import { AppNavigationProp } from "../../navigation/interface";
 import CategoryItem from "./components/item";
@@ -29,6 +30,7 @@ const Categories = () => {
                 data={categories}
                 renderItem={renderCategory}
                 keyExtractor={categoryKeyExtractor}
+                ItemSeparatorComponent={Divider}
             />
         </View>
     )
